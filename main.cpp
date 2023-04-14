@@ -12,6 +12,8 @@ namespace col {
     string END = "\033[0m\n";
     string ENDCOLOR = "\033[0m";
     string GREEN = "\033[92m";
+    string CYAN = "\033[96m";
+    string RED = "\033[91m";
 };
 
 vector<string> findFetches() {
@@ -29,9 +31,21 @@ vector<string> findFetches() {
     return paths;
 }
 
+void outputFetches(vector<string> fetches) {
+    if (fetches.size() <= 0) {
+        cout << col::RED << "No fetches found :(" << col::END;
+        return;
+    } else {
+        cout << col::GREEN << "Found " << to_string(fetches.size()) << " fetches!" << col::END;
+    }
+    for (const string &fetch : fetches) {
+        cout << col::CYAN << "• " << fetch << col::END;
+    }
+}
+
 int main() {
-    cout << col::GREEN << "Fetchfetch" << col::END;
-    vector<string> paths = findFetches();
-    cout << paths[5] << endl;
+    cout << col::GREEN << "Fetchfetch\nScanning $PATH" << col::END;
+    vector<string> fetches = findFetches();
+    outputFetches(fetches);
     return 0;
 }
